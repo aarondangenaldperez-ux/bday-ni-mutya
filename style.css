@@ -202,3 +202,137 @@ main { position: relative; min-height: 100vh; }
 @keyframes treasureReveal { 0% { transform: scale(1) rotate(0); } 45% { transform: scale(1.45) rotate(17deg); } 100% { transform: scale(.9) rotate(-8deg); } }
 .lightbox--message .lightbox-frame { min-height: 170px; display: grid; place-items: center; padding: 35px; }
 .lightbox--message .lightbox-frame p { margin: 0; }
+
+/* Finish details: comfortable vertical layout and intentional empty album artwork */
+.scene--candles { flex-direction: column; gap: 12px; padding-top: 78px; }
+.scene--candles .cake-area { flex: 0 0 auto; }
+.scene--candles .wish-panel,
+.scene--candles .blow-panel { margin-top: 0; }
+.scene--candles .wish-panel textarea { min-height: 58px; }
+
+.archive-placeholder {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 1 / 1.08;
+  padding: 10px 10px 30px;
+  background: #fffdfa;
+  box-shadow: 0 7px 18px rgba(100,72,65,.11);
+  transform: rotate(var(--placeholder-tilt, 0deg));
+}
+.archive-placeholder::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 50% 55%, rgba(255,255,255,.5), transparent 63%),
+    linear-gradient(145deg, #f5e8e3, #e8d7d1);
+}
+.archive-placeholder--1 { --placeholder-tilt: -2deg; }
+.archive-placeholder--2 { --placeholder-tilt: 1.5deg; }
+.archive-placeholder--3 { --placeholder-tilt: -1deg; }
+.archive-placeholder--4 { --placeholder-tilt: 2deg; }
+.archive-placeholder--5 { --placeholder-tilt: .5deg; }
+.archive-placeholder--6 { --placeholder-tilt: -1.5deg; }
+
+.album-page--photos { overflow: hidden; }
+.album-placeholder {
+  position: absolute;
+  width: 36%;
+  aspect-ratio: .82;
+  padding: 7px 7px 19px;
+  background: #fffdf8;
+  box-shadow: 0 4px 11px rgba(100,72,65,.13);
+}
+.album-placeholder::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #f4e9e3, #e6d6d0);
+}
+.album-placeholder--1 { top: 19%; left: 8%; transform: rotate(-8deg); }
+.album-placeholder--2 { top: 12%; right: 8%; transform: rotate(7deg); }
+.album-placeholder--3 { bottom: 9%; left: 32%; transform: rotate(-2deg); }
+.album-letter-mark {
+  width: 46px;
+  height: 46px;
+  margin: auto;
+  border: 1px solid rgba(189,145,137,.3);
+  border-radius: 50%;
+  position: relative;
+  opacity: .55;
+}
+.album-letter-mark::before,
+.album-letter-mark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 1px;
+  background: #c98e9b;
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+.album-letter-mark::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.friend-photo-frame {
+  min-width: 0;
+  padding: 6px 6px 18px;
+  border: 0;
+  background: #fffdf8;
+  box-shadow: 0 3px 8px rgba(100,72,65,.12);
+  transform: rotate(var(--photo-tilt, 0deg));
+  cursor: pointer;
+}
+.friend-photo-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.friend-photo-frame:focus-visible { outline-offset: 2px; }
+
+.page-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: auto !important;
+  min-width: 0;
+  height: 10px;
+  background: transparent;
+}
+.page-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(160,117,107,.32);
+  transition: width .2s, background .2s;
+}
+.page-dot.is-current {
+  width: 14px;
+  border-radius: 8px;
+  background: #c58c9a;
+}
+
+.cd-case--empty {
+  pointer-events: none;
+  border-color: rgba(128,98,79,.16);
+  background: rgba(245,233,221,.72);
+}
+.cd-case--empty .cd-cover {
+  background:
+    radial-gradient(circle at 50% 50%, #d8c8bb 0 3%, #f7eee4 3.5% 5%, transparent 5.5%),
+    repeating-radial-gradient(circle at 50% 50%, #eadfd4 0 1px, #f7eee5 2px 4px, #e1d2c7 5px 6px);
+}
+.cd-case--empty .cd-cover::after { opacity: .5; }
+
+@media (max-width: 700px) {
+  .scene--candles { min-height: 100svh; justify-content: flex-start; gap: 4px; padding-top: 72px; padding-bottom: 28px; }
+  .scene--candles .cake-area { width: 100%; height: 300px; }
+  .scene--candles .cake { width: min(76vw, 360px); }
+  .scene--candles .wish-panel textarea { width: min(88vw, 420px); }
+  .album-placeholder { width: 39%; }
+  .archive-placeholder { padding: 7px 7px 22px; }
+}
