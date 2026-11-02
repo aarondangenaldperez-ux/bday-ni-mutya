@@ -206,6 +206,7 @@ function renderArchive() {
     const button = document.createElement('button');
     button.className = 'archive-photo';
     button.type = 'button';
+    button.setAttribute('aria-label', `Open archived photograph ${index + 1}`);
     button.style.setProperty('--tilt', `${[-2, 1.5, -1, 2, .5][index % 5]}deg`);
     const img = document.createElement('img');
     img.src = photo.image;
@@ -317,6 +318,7 @@ function renderCDPage(animate = false) {
   songs.slice(currentCDPage * perPage, (currentCDPage + 1) * perPage).forEach((song, index) => {
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'cd-case';
+    button.setAttribute('aria-label', song.title ? `Open CD for ${song.title}` : 'Open CD');
     button.style.setProperty('--tilt', `${[-2, 1, 2, -1][index % 4]}deg`);
     const cover = document.createElement('div'); cover.className = 'cd-cover';
     if (song.cover) {
