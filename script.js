@@ -41,6 +41,7 @@ let audioContext = null;
 let micStream = null;
 let micFrame = null;
 let envelopeTimer = null;
+let backgroundPausedForCD = false;
 
 const menuToggle = $('#menuToggle');
 const sideNav = $('#sideNav');
@@ -61,7 +62,11 @@ function showSection(id) {
   if (!sections.includes(id)) return;
   if (id !== 'envelope' && envelopeTimer) { window.clearTimeout(envelopeTimer); envelopeTimer = null; }
   if (id !== 'candles') stopMic();
-  if (id !== 'mixtape') { $('#trackAudio').pause(); $('#trackPlay').textContent = 'Play'; }
+  if (id !== 'mixtape') {
+    $('#trackAudio').pause();
+    $('#trackPlay').textContent = 'Play';
+    if (currentSection === 'mixtape' && backgroundPausedForCD) { backgroundPausedForCD = false; startBackgroundMusic(); }
+  }
   currentSection = id;
   const growth = [1, 1.025, 1.05, 1.075, 1.10, 1.13][sections.indexOf(id)];
   document.body.style.setProperty('--flora-scale', String(growth));
@@ -358,15 +363,21 @@ $('#trackPlay').addEventListener('click', () => {
   if (!selectedSong || !selectedSong.audio) return;
   const audio = $('#trackAudio');
   if (audio.paused) {
+    backgroundPausedForCD = true;
     backgroundMusic.pause();
-    audio.play().then(() => { $('#trackPlay').textContent = 'Pause'; }).catch(() => { $('#trackPlay').textContent = 'Play'; });
+    audio.play().then(() => { $('#trackPlay').textContent = 'Pause'; }).catch(() => {
+      $('#trackPlay').textContent = 'Play';
+      if (backgroundPausedForCD) { backgroundPausedForCD = false; startBackgroundMusic(); }
+    });
   } else {
-    audio.pause(); $('#trackPlay').textContent = 'Play';
+    audio.pause();
+    $('#trackPlay').textContent = 'Play';
+    if (backgroundPausedForCD) { backgroundPausedForCD = false; startBackgroundMusic(); }
   }
 });
 $('#trackAudio').addEventListener('ended', () => {
   $('#trackPlay').textContent = 'Play';
-  if (currentSection === 'mixtape' && !$('#cdPlayer').hidden && backgroundMusic.paused) startBackgroundMusic();
+  if (backgroundPausedForCD) { backgroundPausedForCD = false; startBackgroundMusic(); }
 });
 $('#trackAudio').addEventListener('error', () => { $('#trackPlay').textContent = 'Play'; });
 
