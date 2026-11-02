@@ -36,7 +36,7 @@
 
   <header class="topbar">
     <a class="wordmark" href="#envelope" aria-label="Bday ni Mutya home">Bday ni Mutya</a>
-    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open sections" aria-expanded="false">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open sections" aria-controls="sideNav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -137,7 +137,7 @@
         <div class="cake-flower cake-flower--right" aria-hidden="true"><svg viewBox="0 0 130 180"><path class="stem" d="M62 182 C60 120 77 82 65 40"/><path class="leaf" d="M62 120 C20 91 4 109 10 137 C32 146 51 135 62 120Z"/><g class="tulip" transform="translate(65 48)"><path d="M0 12 C-42 -2 -48 -45 -31 -63 C-16 -50 -8 -46 0 -66 C8 -46 17 -50 32 -63 C49 -45 42 -2 0 12Z"/></g></svg></div>
       </div>
       <div class="wish-panel" id="wishPanel">
-        <textarea id="wishInput" rows="2" maxlength="500" aria-label="Birthday wish"></textarea>
+        <textarea id="wishInput" rows="2" maxlength="500" aria-label="Birthday wish" placeholder="Type your birthday wish..." autocomplete="off" spellcheck="false"></textarea>
         <button class="primary-action" id="confirmWish" type="button">Confirm</button>
       </div>
       <div class="blow-panel" id="blowPanel" hidden>
