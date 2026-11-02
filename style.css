@@ -336,3 +336,5 @@ main { position: relative; min-height: 100vh; }
   .album-placeholder { width: 39%; }
   .archive-placeholder { padding: 7px 7px 22px; }
 }
+
+.privacy-note { max-width: min(88vw, 420px); margin: -4px 0 0; color: #9c7e7a; font-size: 11px; line-height: 1.5; text-align: center; }
