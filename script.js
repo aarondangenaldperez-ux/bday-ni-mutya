@@ -61,6 +61,7 @@ function showSection(id) {
   if (!sections.includes(id)) return;
   if (id !== 'envelope' && envelopeTimer) { window.clearTimeout(envelopeTimer); envelopeTimer = null; }
   if (id !== 'candles') stopMic();
+  if (id !== 'mixtape') { $('#trackAudio').pause(); $('#trackPlay').textContent = 'Play'; }
   currentSection = id;
   const growth = [1, 1.025, 1.05, 1.075, 1.10, 1.13][sections.indexOf(id)];
   document.body.style.setProperty('--flora-scale', String(growth));
@@ -80,7 +81,8 @@ function showSection(id) {
 
 menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
 navScrim.addEventListener('click', () => setMenu(false));
-$$('.nav-link').forEach(link => link.addEventListener('click', () => showSection(link.dataset.target)));
+$('.nav-link').forEach(link => link.addEventListener('click', () => showSection(link.dataset.target)));
+$('.wordmark').addEventListener('click', event => { event.preventDefault(); showSection('envelope'); });
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     setMenu(false);
@@ -281,6 +283,8 @@ $('#friendPrev').addEventListener('click', () => { currentFriend--; renderFriend
 $('#friendNext').addEventListener('click', () => { currentFriend++; renderFriend(); });
 
 function renderCDPage(animate = false) {
+  $('#trackAudio').pause();
+  $('#trackPlay').textContent = 'Play';
   const wallet = $('.cd-wallet');
   wallet.classList.remove('is-turning');
   if (animate) {
@@ -497,6 +501,7 @@ function renderTreasures() {
 }
 
 function init() {
+  setMenu(false);
   setupHomepagePhotos();
   renderArchive();
   renderFriend();
