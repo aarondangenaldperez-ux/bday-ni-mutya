@@ -126,15 +126,80 @@
 
     <section class="scene scene--candles" id="candles" aria-label="Birthday candles" hidden>
       <div class="cake-area">
-        <div class="cake-flower cake-flower--left" aria-hidden="true"><svg viewBox="0 0 130 180"><path class="stem" d="M62 182 C60 120 77 82 65 40"/><path class="leaf" d="M62 120 C20 91 4 109 10 137 C32 146 51 135 62 120Z"/><g class="lily" transform="translate(65 42)"><path d="M0 0 C-42 -48 -63 -16 -30 8 C-57 25 -35 59 0 17 C35 59 57 25 30 8 C63 -16 42 -48 0 0Z"/></g></svg></div>
-        <div class="cake" id="cake">
-          <div class="candles" id="candleSet" aria-label="18 birthday candles"></div>
-          <div class="cake-tier cake-tier--top"><div class="icing-drip"></div></div>
-          <div class="cake-tier cake-tier--bottom"><div class="icing-drip"></div></div>
-          <div class="cake-plate"></div>
-          <div class="cake-flower-detail" aria-hidden="true"> </div>
+        <div class="cake-flower cake-flower--left" aria-hidden="true">
+          <svg viewBox="0 0 130 180" role="presentation">
+            <path class="stem" d="M62 182 C60 120 77 82 65 40"/>
+            <path class="leaf" d="M62 120 C20 91 4 109 10 137 C32 146 51 135 62 120Z"/>
+            <g class="lily" transform="translate(65 42)">
+              <path d="M0 0 C-42 -48 -63 -16 -30 8 C-57 25 -35 59 0 17 C35 59 57 25 30 8 C63 -16 42 -48 0 0Z"/>
+              <path class="vein" d="M0 4 L-25 -27 M0 4 L25 -27 M0 4 L-22 30 M0 4 L22 30"/>
+              <circle cx="0" cy="5" r="3"/>
+            </g>
+          </svg>
         </div>
-        <div class="cake-flower cake-flower--right" aria-hidden="true"><svg viewBox="0 0 130 180"><path class="stem" d="M62 182 C60 120 77 82 65 40"/><path class="leaf" d="M62 120 C20 91 4 109 10 137 C32 146 51 135 62 120Z"/><g class="tulip" transform="translate(65 48)"><path d="M0 12 C-42 -2 -48 -45 -31 -63 C-16 -50 -8 -46 0 -66 C8 -46 17 -50 32 -63 C49 -45 42 -2 0 12Z"/></g></svg></div>
+
+        <div class="cake" id="cake" role="group" aria-label="Two-tier pink watercolor birthday cake decorated with lilies and eighteen candles">
+          <div class="candles" id="candleSet" role="group" aria-label="Eighteen lit birthday candles"></div>
+
+          <div class="cake-tier cake-tier--top" aria-hidden="true">
+            <div class="icing-drip"></div>
+            <div class="cake-beadline"></div>
+          </div>
+          <div class="cake-tier cake-tier--bottom" aria-hidden="true">
+            <div class="icing-drip"></div>
+            <div class="cake-beadline"></div>
+          </div>
+
+          <div class="cake-flower-detail" aria-hidden="true">
+            <svg class="cake-flower-art" viewBox="0 0 400 140" role="presentation">
+              <path class="cake-vine" d="M32 112 C86 50 132 100 186 83 S286 92 368 30"/>
+              <path class="cake-leaf" d="M73 83 C38 51 20 56 18 79 C37 98 58 97 73 83Z"/>
+              <path class="cake-leaf" d="M149 91 C139 119 111 128 91 116 C104 93 127 86 149 91Z"/>
+              <path class="cake-leaf" d="M232 81 C240 48 267 38 286 49 C272 73 252 83 232 81Z"/>
+              <path class="cake-leaf" d="M321 61 C341 82 366 79 378 59 C358 43 338 45 321 61Z"/>
+
+              <g class="cake-lily-bloom" transform="translate(108 64) scale(.72)">
+                <path class="cake-lily-petal cake-lily-petal--1" d="M0 3 C-13 -15 -22 -43 -7 -56 C4 -56 8 -25 3 3Z"/>
+                <path class="cake-lily-petal cake-lily-petal--2" d="M1 2 C4 -19 10 -49 25 -51 C37 -45 20 -13 3 5Z"/>
+                <path class="cake-lily-petal cake-lily-petal--3" d="M3 2 C22 -12 44 -27 54 -16 C59 -3 28 8 4 7Z"/>
+                <path class="cake-lily-petal cake-lily-petal--4" d="M3 4 C24 14 44 31 37 44 C24 51 8 25 0 7Z"/>
+                <path class="cake-lily-petal cake-lily-petal--5" d="M0 5 C-3 27 -8 52 -22 53 C-35 44 -15 13 -2 3Z"/>
+                <path class="cake-lily-petal cake-lily-petal--6" d="M-3 3 C-24 14 -50 22 -55 8 C-56 -7 -23 -8 -3 0Z"/>
+                <path class="cake-lily-vein" d="M0 4 L-5 -43 M2 4 L20 -39 M4 4 L44 -13 M3 6 L29 36 M-1 7 L-19 43 M-4 4 L-43 4"/>
+                <path class="cake-stamen" d="M0 4 L8 -18 M0 4 L-8 -20 M0 4 L14 -12"/>
+                <circle class="cake-lily-center" cx="0" cy="4" r="5"/>
+              </g>
+
+              <g class="cake-lily-bloom cake-lily-bloom--small" transform="translate(292 54) scale(.54) rotate(18)">
+                <path class="cake-lily-petal cake-lily-petal--1" d="M0 3 C-13 -15 -22 -43 -7 -56 C4 -56 8 -25 3 3Z"/>
+                <path class="cake-lily-petal cake-lily-petal--2" d="M1 2 C4 -19 10 -49 25 -51 C37 -45 20 -13 3 5Z"/>
+                <path class="cake-lily-petal cake-lily-petal--3" d="M3 2 C22 -12 44 -27 54 -16 C59 -3 28 8 4 7Z"/>
+                <path class="cake-lily-petal cake-lily-petal--4" d="M3 4 C24 14 44 31 37 44 C24 51 8 25 0 7Z"/>
+                <path class="cake-lily-petal cake-lily-petal--5" d="M0 5 C-3 27 -8 52 -22 53 C-35 44 -15 13 -2 3Z"/>
+                <path class="cake-lily-petal cake-lily-petal--6" d="M-3 3 C-24 14 -50 22 -55 8 C-56 -7 -23 -8 -3 0Z"/>
+                <path class="cake-lily-vein" d="M0 4 L-5 -43 M2 4 L20 -39 M4 4 L44 -13 M3 6 L29 36 M-1 7 L-19 43 M-4 4 L-43 4"/>
+                <path class="cake-stamen" d="M0 4 L8 -18 M0 4 L-8 -20 M0 4 L14 -12"/>
+                <circle class="cake-lily-center" cx="0" cy="4" r="5"/>
+              </g>
+
+              <path class="cake-bud" d="M201 91 C187 70 193 54 207 49 C221 58 220 76 201 91Z"/>
+              <path class="cake-bud-vein" d="M201 88 L207 57"/>
+            </svg>
+          </div>
+
+          <div class="cake-plate" aria-hidden="true"></div>
+        </div>
+
+        <div class="cake-flower cake-flower--right" aria-hidden="true">
+          <svg viewBox="0 0 130 180" role="presentation">
+            <path class="stem" d="M62 182 C60 120 77 82 65 40"/>
+            <path class="leaf" d="M62 120 C20 91 4 109 10 137 C32 146 51 135 62 120Z"/>
+            <g class="tulip" transform="translate(65 48)">
+              <path d="M0 12 C-42 -2 -48 -45 -31 -63 C-16 -50 -8 -46 0 -66 C8 -46 17 -50 32 -63 C49 -45 42 -2 0 12Z"/>
+              <path class="vein" d="M0 8 L0 -45"/>
+            </g>
+          </svg>
+        </div>
       </div>
       <div class="wish-panel" id="wishPanel">
         <textarea id="wishInput" rows="2" maxlength="500" aria-label="Birthday wish" placeholder="Type your birthday wish..." autocomplete="off" spellcheck="false"></textarea>
@@ -143,7 +208,7 @@
       </div>
       <div class="blow-panel" id="blowPanel" hidden>
         <button class="primary-action" id="blowCandles" type="button">Blow the candles</button>
-        <button class="text-control" id="tapBlowFallback" type="button" hidden>Tap the candles</button>
+        <button class="text-control" id="tapBlowFallback" type="button" hidden>Tap the candles instead</button>
         <p class="mic-note" id="micNote" aria-live="polite"></p>
       </div>
     </section>
