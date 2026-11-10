@@ -642,3 +642,57 @@ main { min-height: 100svh; }
   .nav-index { font-size: 9px; padding-right: 6px; }
   .nav-name { font-size: 10px; letter-spacing: .015em; }
 }
+
+
+/* Precision corrections: the letter must stay fully concealed until the envelope opens. */
+.letter-sheet {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(112%);
+  transition:
+    transform .82s .16s cubic-bezier(.16,.74,.2,1),
+    opacity .32s .16s ease,
+    visibility 0s .16s;
+}
+.envelope.is-open .letter-sheet {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(27%);
+  transition:
+    transform .82s .16s cubic-bezier(.16,.74,.2,1),
+    opacity .32s .16s ease,
+    visibility 0s;
+}
+
+/* The candle rows follow the perspective of the top cake tier instead of floating above it. */
+.scene--candles .candles { top: 56px; }
+.scene--candles .candle { touch-action: manipulation; }
+.scene--candles .candle:disabled { opacity: 1; }
+.scene--candles .blow-panel .primary-action:disabled {
+  opacity: .58;
+  cursor: wait;
+}
+.scene--candles .mic-note {
+  max-width: min(88vw, 390px);
+  text-align: center;
+}
+.scene--candles .wish-panel,
+.scene--candles .blow-panel {
+  width: min(92vw, 470px);
+  position: relative;
+  z-index: 9;
+}
+.nav-link[aria-current="page"] {
+  outline: 1px solid rgba(174,116,112,.58);
+  outline-offset: 2px;
+}
+.nav-link .nav-name { overflow-wrap: anywhere; }
+
+@media (max-width: 700px) {
+  .scene--candles .candles { top: 35px; }
+  .scene--candles .wish-panel,
+  .scene--candles .blow-panel { width: min(94vw, 440px); }
+}
+@media (max-width: 380px) {
+  .scene--candles .candles { top: 32px; }
+}
