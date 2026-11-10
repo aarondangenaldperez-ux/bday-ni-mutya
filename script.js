@@ -102,12 +102,13 @@ function startBackgroundMusic() {
   backgroundMusic.volume = 0.45;
   const playAttempt = backgroundMusic.play();
   if (playAttempt && typeof playAttempt.then === 'function') {
-    playAttempt.then(() => { audioRetry.hidden = true; }).catch(() => { audioRetry.hidden = false; });
+    playAttempt.then(() => { audioRetry.hidden = true; }).catch(() => { audioRetry.hidden = Boolean(backgroundMusic.error); });
   }
 }
 
+backgroundMusic.addEventListener('error', () => { audioRetry.hidden = true; });
 audioRetry.addEventListener('click', () => {
-  backgroundMusic.play().then(() => { audioRetry.hidden = true; }).catch(() => { audioRetry.hidden = false; });
+  backgroundMusic.play().then(() => { audioRetry.hidden = true; }).catch(() => { audioRetry.hidden = Boolean(backgroundMusic.error); });
 });
 
 $('#openEnvelope').addEventListener('click', () => {
@@ -362,7 +363,7 @@ $('#backToCDs').addEventListener('click', () => {
   selectedSong = null;
   renderCDPage();
   if (!backgroundMusic.paused) return;
-  backgroundMusic.play().catch(() => { audioRetry.hidden = false; });
+  backgroundMusic.play().catch(() => { audioRetry.hidden = Boolean(backgroundMusic.error); });
 });
 $('#trackPlay').addEventListener('click', () => {
   if (!selectedSong || !selectedSong.audio) return;
