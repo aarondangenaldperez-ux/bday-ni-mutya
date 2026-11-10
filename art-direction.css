@@ -696,3 +696,29 @@ main { min-height: 100svh; }
 @media (max-width: 380px) {
   .scene--candles .candles { top: 32px; }
 }
+
+
+/* Soft Peanuts character doodles, treated as background stationery rather than content. */
+.peanuts-wash {
+  position: fixed;
+  z-index: -1;
+  right: -2.5vw;
+  bottom: -2vh;
+  width: min(56vw, 650px);
+  opacity: .17;
+  pointer-events: none;
+  transform: rotate(-2deg);
+  filter: saturate(.72);
+}
+.peanuts-wash svg { display:block; width:100%; height:auto; overflow:visible; }
+.peanuts-wash .peanuts-snoopy { transform-box:fill-box; transform-origin:center; }
+.peanuts-wash .peanuts-doghouse { opacity:.55; }
+.peanuts-wash .peanuts-woodstock { opacity:.9; }
+@media (max-width:700px) {
+  .peanuts-wash {
+    width: min(82vw, 430px);
+    right: -17vw;
+    bottom: 1vh;
+    opacity: .12;
+  }
+}
