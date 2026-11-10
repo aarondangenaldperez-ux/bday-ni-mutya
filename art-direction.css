@@ -1,0 +1,534 @@
+/* Bday ni Mutya — art direction refinement
+   Original analog-folk scrapbook styling; existing content and interactions stay intact. */
+:root {
+  --paper: #efe6d8;
+  --paper-light: #fff9f0;
+  --paper-warm: #e8d9c7;
+  --blush: #ecc4c7;
+  --rose: #c98191;
+  --coral: #bb6d71;
+  --gold: #d2ad70;
+  --sage: #a8b69a;
+  --moss: #6e876f;
+  --teal: #36594f;
+  --blue: #2c4145;
+  --ink: #394c43;
+  --muted: #807064;
+  --serif: "Cormorant Garamond", "Palatino Linotype", Georgia, serif;
+  --sans: "DM Sans", "Avenir Next", Arial, sans-serif;
+}
+html { background: var(--paper); }
+body {
+  color: var(--ink);
+  font-family: var(--sans);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 12% 14%, rgba(237,194,198,.28), transparent 29%),
+    radial-gradient(ellipse at 88% 82%, rgba(173,190,157,.22), transparent 31%),
+    radial-gradient(rgba(86,67,49,.07) .55px, transparent .9px),
+    linear-gradient(135deg, #f3eadc 0%, #eee2d4 48%, #f4eadf 100%);
+  background-size: auto, auto, 6px 6px, auto;
+}
+body::before {
+  left: -10vw; bottom: -17vh; width: min(58vw, 690px); height: min(66vw, 760px);
+  background-image: url("assets/art/lily-tulip-study.svg");
+  transform: rotate(-12deg) scaleX(-1); opacity: .28;
+}
+.paper-grain { opacity: .15; mix-blend-mode: multiply; }
+.floral-wash--top {
+  top: -118px; right: -96px; width: min(48vw, 610px);
+  opacity: .48; transform: rotate(5deg);
+}
+.floral-wash img {
+  filter: saturate(.9) contrast(.96);
+  mix-blend-mode: multiply;
+}
+
+.topbar {
+  height: 76px; padding-inline: clamp(20px, 5vw, 68px);
+  background: linear-gradient(180deg, rgba(245,237,225,.68), rgba(245,237,225,0));
+}
+.wordmark {
+  color: #354a43; font: 600 clamp(20px, 2vw, 26px)/1 var(--serif);
+  letter-spacing: -.035em; text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  position: relative;
+}
+.wordmark::after {
+  content: ""; position: absolute; left: 1px; right: 3px; bottom: -7px;
+  height: 1px; background: linear-gradient(90deg, #c88b87, rgba(200,139,135,0));
+}
+.menu-toggle {
+  width: 49px; height: 49px; border: 1px solid rgba(61,86,72,.35);
+  border-radius: 16px 50% 17px 50%;
+  background: linear-gradient(145deg, rgba(255,251,244,.98), rgba(231,219,199,.92));
+  box-shadow: 2px 4px 0 rgba(61,76,60,.12), inset 0 1px 0 white;
+}
+.menu-toggle span { background: #476554; height: 1.6px; width: 18px; }
+.side-nav {
+  top: 84px; right: clamp(16px, 3.2vw, 42px);
+  width: 158px; padding: 13px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  border: 1px solid rgba(126,99,78,.34);
+  border-radius: 17px 22px 16px 21px;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(236,197,195,.25), transparent 48%),
+    rgba(250,244,233,.97);
+  box-shadow: 4px 7px 0 rgba(59,75,59,.11), 0 15px 35px rgba(71,62,48,.13);
+  transform: translateY(-9px) scale(.96);
+  backdrop-filter: blur(10px);
+}
+.side-nav.is-open { transform: translateY(0) scale(1); }
+.nav-link {
+  width: 57px; height: 54px; padding: 0;
+  border: 1px solid rgba(131,105,83,.26);
+  border-radius: 13px 10px 14px 9px;
+  background: linear-gradient(145deg, #fffaf1, #f0e5d4);
+  box-shadow: 0 2px 0 rgba(119,93,72,.13), inset 0 1px 0 rgba(255,255,255,.9);
+  font-size: 24px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.nav-link:nth-child(2n) { border-radius: 10px 14px 9px 13px; transform: rotate(2deg); }
+.nav-link:nth-child(3n) { transform: rotate(-2deg); }
+.nav-link:hover, .nav-link.is-current {
+  background: linear-gradient(145deg, #f8dedc, #eac3c4);
+  border-color: rgba(171,111,112,.4);
+  box-shadow: 0 4px 0 rgba(139,91,87,.16), inset 0 1px 0 rgba(255,255,255,.7);
+  transform: translateY(-2px) rotate(-2deg) scale(1.035);
+}
+.nav-link:active { transform: translateY(1px) scale(.97); }
+.nav-scrim {
+  background: rgba(43,61,54,.12);
+  backdrop-filter: blur(2px);
+}
+
+main { min-height: 100svh; }
+.scene {
+  min-height: 100svh; padding: 104px 24px 54px;
+  isolation: isolate;
+}
+.scene::before {
+  inset: 3% 2%;
+  background: url("assets/art/lily-tulip-study.svg") left 3% center / min(42vw, 520px) auto no-repeat;
+  opacity: .17;
+}
+.scene--envelope { gap: 31px; padding-top: 78px; }
+.envelope-stage { width: min(78vw, 560px); }
+.envelope-stage::before {
+  width: 73%; height: 94%; left: -29%; top: -31%;
+  background-image: url("assets/art/lily-tulip-study.svg");
+  opacity: .5; transform: rotate(-8deg);
+}
+.envelope-shadow {
+  bottom: -20px; height: 31px;
+  background: rgba(51,69,57,.2); filter: blur(19px);
+}
+.envelope-back {
+  border: 1px solid rgba(135,99,78,.28);
+  border-radius: 7px;
+  background: linear-gradient(145deg, #d9b69f 0%, #e8cbb7 45%, #d1aa98 100%);
+  box-shadow: 0 18px 28px rgba(65,56,48,.19), inset 0 1px 0 rgba(255,255,255,.5);
+}
+.envelope-front {
+  border-radius: 7px;
+  background: linear-gradient(145deg, #ecd1bd, #dfbda8 74%, #e7cbb5);
+}
+.envelope-front::after {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(110,74,65,.04) 6px),
+    linear-gradient(135deg, rgba(255,255,255,.16), transparent 55%);
+}
+.envelope-flap {
+  background: linear-gradient(140deg, #f4ddca, #e6c6b2);
+  filter: drop-shadow(0 2px 2px rgba(119,83,70,.08));
+}
+.letter-sheet {
+  border-color: rgba(149,111,92,.35);
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(236,197,195,.15), transparent 55%),
+    repeating-linear-gradient(0deg, #fff9f0 0 6px, #fdf5e9 7px 8px);
+  box-shadow: 0 7px 16px rgba(94,67,61,.15);
+}
+.letter-lines {
+  inset: 26% 12% 12%;
+  opacity: .34;
+  background: repeating-linear-gradient(to bottom, transparent 0 27px, #c9aaa0 28px 29px);
+}
+.wax-seal {
+  width: 68px; height: 68px;
+  background: radial-gradient(circle at 34% 28%, #d68a86, #a84f58 72%);
+  border: 4px double rgba(255,226,205,.64);
+  box-shadow: 0 4px 9px rgba(108,61,72,.28), inset 0 3px 9px rgba(255,255,255,.3), inset 0 -3px 7px rgba(83,35,46,.16);
+}
+.wax-seal span { width: 22px; height: 22px; border: 1px solid rgba(255,240,220,.9); box-shadow: inset 0 0 0 4px rgba(255,240,220,.11); }
+.primary-action {
+  min-width: 126px; min-height: 47px; padding: 11px 26px;
+  border: 1px solid rgba(44,80,66,.48);
+  border-radius: 13px 4px 13px 4px;
+  color: #fff8ef;
+  background: linear-gradient(145deg, #476d5a, #315748);
+  box-shadow: 3px 4px 0 rgba(44,60,47,.19), inset 0 1px 0 rgba(255,255,255,.18);
+  font: 600 12px/1.2 var(--sans); letter-spacing: .14em;
+}
+.primary-action:hover { transform: translate(-1px,-2px); box-shadow: 5px 7px 0 rgba(44,60,47,.17), inset 0 1px 0 rgba(255,255,255,.18); }
+.primary-action:disabled { opacity: .55; cursor: default; transform: none; }
+.audio-retry {
+  border: 1px solid rgba(130,101,81,.32);
+  background: rgba(255,249,240,.94);
+  box-shadow: 2px 4px 0 rgba(61,76,60,.12);
+}
+
+.scene--home { overflow: hidden; }
+.scene--home::before {
+  inset: 0;
+  background-position: left 2% bottom -4%;
+  background-size: min(48vw, 580px) auto;
+  opacity: .24;
+}
+.home-layout {
+  width: min(100%, 1080px); min-height: 650px;
+  display: grid; place-items: center; position: relative;
+}
+.home-layout::after {
+  content: ""; position: absolute; right: -8%; top: 0;
+  width: 43%; height: 80%;
+  background: url("assets/art/lily-tulip-study.svg") center / contain no-repeat;
+  transform: scaleX(-1) rotate(13deg); opacity: .29; pointer-events: none;
+}
+.home-flower {
+  display: block; position: absolute; z-index: 1; pointer-events: none;
+  width: clamp(104px, 17vw, 190px); opacity: .82;
+  filter: drop-shadow(0 7px 8px rgba(90,77,59,.07));
+}
+.home-flower--left { left: -1%; bottom: 0; transform: rotate(-7deg); }
+.home-flower--right { right: 1%; top: 1%; transform: rotate(8deg) scale(.9); }
+.home-flower .stem { fill: none; stroke: #6f8b6f; stroke-width: 5; stroke-linecap: round; }
+.home-flower .leaf { fill: #9caf8d; stroke: #6f8c70; stroke-width: 2; }
+.home-flower .lily path:first-child { fill: #eab9c5; stroke: #b9788c; stroke-width: 1.5; }
+.home-flower .tulip path:first-child { fill: #e6a6a5; stroke: #b97880; stroke-width: 1.5; }
+.home-flower .vein { fill: none; stroke: rgba(255,244,231,.82); stroke-width: 2.2; }
+.polaroid-collage {
+  width: min(86vw, 760px); height: min(69vw, 630px); min-height: 480px;
+  filter: drop-shadow(0 15px 19px rgba(64,62,48,.07));
+}
+.polaroid {
+  padding: 13px 13px 45px;
+  background: linear-gradient(148deg, #fffdf8, #f6eddf);
+  border: 1px solid rgba(117,86,75,.27);
+  box-shadow: 4px 8px 0 rgba(115,87,69,.1), 0 16px 27px rgba(59,69,61,.15), inset 0 1px 0 white;
+}
+.polaroid::before {
+  top: -10px; width: 64px; height: 20px;
+  background: linear-gradient(135deg, rgba(224,203,163,.74), rgba(199,179,146,.58));
+  box-shadow: 0 1px 3px rgba(98,77,57,.08);
+}
+.polaroid::after {
+  content: ""; position: absolute; left: 37%; bottom: 19px;
+  width: 26%; height: 1px; background: rgba(174,139,113,.42);
+}
+.photo-well {
+  background-color: #e4d8c9;
+  background-image:
+    linear-gradient(145deg, rgba(255,255,255,.7), rgba(228,209,194,.2)),
+    url("assets/art/lily-tulip-study.svg"),
+    repeating-linear-gradient(0deg, transparent 0 4px, rgba(72,82,68,.035) 5px);
+  background-position: center, center 42%, 0 0;
+  background-size: cover, 82% auto, auto;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+.photo-well::after { border: 1px solid rgba(255,255,255,.54); }
+.polaroid--main { width: 48%; height: 80%; left: 26%; top: 9%; transform: rotate(-2.2deg); padding: 15px 15px 51px; }
+.polaroid--one { width: 29%; height: 43%; left: 4%; top: 3%; transform: rotate(-8deg); }
+.polaroid--two { width: 27%; height: 40%; right: 3%; top: 0; transform: rotate(7deg); }
+.polaroid--three { width: 28%; height: 39%; left: 1%; bottom: 0; transform: rotate(5deg); }
+.polaroid--four { width: 27%; height: 41%; right: 4%; bottom: 0; transform: rotate(-6deg); }
+
+.section-paper {
+  width: min(100%, 1020px); min-height: 570px; padding: 34px;
+  border: 1px solid rgba(139,112,86,.35);
+  background:
+    radial-gradient(ellipse at 0 0, rgba(238,204,198,.17), transparent 36%),
+    radial-gradient(ellipse at 100% 100%, rgba(182,198,167,.14), transparent 38%),
+    radial-gradient(rgba(99,76,53,.065) .6px, transparent .9px),
+    linear-gradient(135deg, #fbf5e9, #f1e7d7);
+  background-size: auto, auto, 7px 7px, auto;
+  box-shadow: 5px 8px 0 rgba(67,73,59,.08), 0 22px 44px rgba(65,62,52,.14);
+  clip-path: polygon(0 1%, 6% .3%, 13% 1%, 22% .3%, 31% .9%, 43% .2%, 56% .9%, 68% .3%, 81% .9%, 92% .3%, 100% 1%, 99.4% 100%, 90% 99.4%, 78% 100%, 64% 99.4%, 53% 100%, 39% 99.4%, 26% 100%, 14% 99.4%, 0 100%);
+}
+.section-paper::before { inset: 12px; border-color: rgba(170,130,99,.35); }
+.archive-grid {
+  min-height: 500px; gap: clamp(15px, 2.3vw, 30px);
+  align-content: center;
+}
+.archive-placeholder {
+  min-height: 170px; padding: 9px 9px 27px;
+  border: 1px solid rgba(132,105,81,.22);
+  background: linear-gradient(145deg, #fffdf8, #f2e8d9);
+  box-shadow: 3px 6px 0 rgba(111,89,70,.1), 0 9px 17px rgba(100,72,65,.12);
+  transform: rotate(var(--tilt, -1deg));
+  position: relative;
+}
+.archive-placeholder:nth-child(2n) { --tilt: 1.8deg; }
+.archive-placeholder:nth-child(3n) { --tilt: -2deg; }
+.archive-placeholder::before {
+  content: ""; display: block; width: 100%; aspect-ratio: 1 / 1.08;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.52), rgba(221,199,182,.12)),
+    url("assets/art/lily-tulip-study.svg") center / 88% auto no-repeat,
+    #e8d9ca;
+  border: 1px solid rgba(255,255,255,.55);
+}
+.archive-placeholder::after {
+  content: ""; position: absolute; top: -7px; left: 50%; width: 48px; height: 15px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(219,193,153,.65);
+  box-shadow: 0 1px 3px rgba(86,70,54,.08);
+}
+.album-book {
+  width: min(94vw, 940px); min-height: 535px;
+  padding: 31px 29px 76px 47px; gap: 15px;
+  background:
+    radial-gradient(ellipse at 12% 15%, rgba(234,206,180,.14), transparent 40%),
+    url("assets/art/lily-tulip-study.svg") 88% 0 / 39% auto no-repeat,
+    repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 6px),
+    linear-gradient(145deg, #4e705d, #36584e 60%, #29473f);
+  border: 1px solid rgba(35,63,84,.4);
+  border-radius: 5px 13px 12px 5px;
+  box-shadow: 5px 8px 0 rgba(35,63,84,.13), 0 22px 45px rgba(42,58,49,.22);
+}
+.album-book::before { inset: 11px; border-color: rgba(250,239,215,.36); }
+.album-spine { left: 27px; width: 4px; background: rgba(18,52,48,.35); box-shadow: 4px 0 rgba(255,255,255,.18); }
+.album-page {
+  border-color: rgba(149,110,90,.32);
+  background:
+    radial-gradient(ellipse at 8% 0, rgba(236,196,194,.13), transparent 45%),
+    radial-gradient(rgba(105,76,52,.065) .6px, transparent .9px),
+    linear-gradient(135deg, #fff9ee, #f0e4d3);
+  background-size: auto, 7px 7px, auto;
+  box-shadow: inset 0 0 18px rgba(153,111,92,.09), 0 2px 3px rgba(88,70,52,.08);
+}
+.album-page--letter {
+  background:
+    linear-gradient(90deg, transparent 0 30px, rgba(195,103,104,.24) 31px 32px, transparent 33px),
+    repeating-linear-gradient(to bottom, #fff7e9 0 31px, #e8d8c9 32px 33px);
+}
+.album-controls, .wallet-controls { gap: 17px; }
+.round-control {
+  width: 42px; height: 42px; border: 1px solid rgba(77,99,77,.4);
+  background: linear-gradient(145deg, #fff9ef, #eadbc6);
+  box-shadow: 2px 4px 0 rgba(35,63,84,.13);
+  transition: transform .18s, box-shadow .18s;
+}
+.round-control:not(:disabled):hover { transform: translateY(-2px); box-shadow: 3px 6px 0 rgba(35,63,84,.13); }
+.page-dot.is-current { background: #bd7979; }
+
+.cd-wallet {
+  width: min(92vw, 890px); min-height: 520px; padding: 34px;
+  background:
+    url("assets/art/lily-tulip-study.svg") 91% 0 / 42% auto no-repeat,
+    repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 6px),
+    linear-gradient(145deg, #355e57, #284b48 65%, #1f4141);
+  border: 1px solid rgba(26,53,59,.52); border-radius: 7px;
+  box-shadow: 5px 8px 0 rgba(35,63,84,.15), 0 22px 48px rgba(41,58,53,.24);
+}
+.wallet-cover { inset: 13px; border-color: rgba(255,246,226,.48); }
+.cd-pages {
+  min-height: 430px; padding: 21px; gap: clamp(15px, 2vw, 25px);
+  background:
+    radial-gradient(ellipse at 80% 0, rgba(232,197,194,.17), transparent 48%),
+    radial-gradient(rgba(105,76,52,.065) .6px, transparent .9px),
+    linear-gradient(135deg, #f9f0e0, #eaddc9);
+  background-size: auto, 7px 7px, auto;
+  border-color: rgba(128,98,79,.3);
+}
+.cd-case {
+  padding: 10px; border-color: rgba(128,98,79,.32);
+  background: linear-gradient(145deg, #fffaf0, #e7d7c3);
+  box-shadow: 3px 5px 0 rgba(110,82,62,.12), 0 8px 15px rgba(99,74,67,.15);
+  transition: transform .22s, box-shadow .22s;
+}
+.cd-case--empty { cursor: default; }
+.cd-case--empty:hover { transform: rotate(var(--tilt,0deg)); box-shadow: 3px 5px 0 rgba(110,82,62,.12), 0 8px 15px rgba(99,74,67,.15); }
+.cd-case--empty .cd-cover {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.55), rgba(224,204,181,.1)),
+    url("assets/art/lily-tulip-study.svg") center / 82% auto no-repeat,
+    #d7c2af;
+}
+.cd-cover::after {
+  border-color: rgba(255,255,255,.85);
+  background: radial-gradient(circle, #bca99b 0 4%, #f8f1e6 5% 8%, #cbb7a5 9% 11%, transparent 12%);
+}
+.cd-player {
+  border-radius: 3px; border-color: rgba(147,103,92,.35);
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(235,196,195,.19), transparent 48%),
+    radial-gradient(rgba(105,76,52,.07) .6px, transparent .9px),
+    linear-gradient(135deg, #fff8ed, #eee1ce);
+  box-shadow: 4px 7px 0 rgba(35,63,84,.12), 0 21px 44px rgba(101,74,69,.18);
+}
+.player-disc {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.85), transparent 36%),
+    repeating-radial-gradient(circle, #d4c7b6 0 1px, #f3e9db 2px 4px, #bdae9c 5px 6px);
+}
+
+.scene--candles {
+  gap: 18px; padding-top: 86px; padding-bottom: 45px;
+  background:
+    radial-gradient(ellipse at 50% 62%, rgba(255,245,227,.68), transparent 48%),
+    transparent;
+}
+.scene--candles::before {
+  inset: 0; background-position: center 46%;
+  background-size: min(76vw, 780px) auto; opacity: .25;
+}
+.cake-area { width: min(96vw, 790px); height: 420px; }
+.cake-area::before {
+  width: min(80vw, 620px); height: 77%;
+  background: radial-gradient(ellipse, rgba(255,250,239,.82), rgba(220,184,164,.16) 58%, transparent 75%);
+  filter: blur(8px);
+}
+.cake { width: min(72vw, 490px); height: 365px; }
+.cake-tier {
+  border-color: rgba(174,115,112,.38);
+  background-image:
+    radial-gradient(ellipse at 19% 23%, rgba(255,255,255,.76), transparent 36%),
+    radial-gradient(ellipse at 82% 74%, rgba(198,99,102,.18), transparent 46%),
+    repeating-radial-gradient(ellipse at 40% 30%, rgba(255,255,255,.07) 0 2px, transparent 2.5px 8px),
+    linear-gradient(145deg, #f4d5d1, #eab9bd 62%, #e5aeb5);
+  box-shadow: inset 0 9px 14px rgba(255,255,255,.48), inset 0 -8px 14px rgba(166,100,119,.13), 0 14px 21px rgba(130,80,83,.15);
+}
+.cake-tier--top {
+  background-image:
+    radial-gradient(ellipse at 18% 20%, rgba(255,255,255,.82), transparent 38%),
+    radial-gradient(ellipse at 85% 72%, rgba(198,99,102,.14), transparent 48%),
+    linear-gradient(145deg, #f7e2dc, #f0c9c8 67%, #e8b8bd);
+}
+.cake-flower { display: block; position: absolute; z-index: 1; width: clamp(74px, 13vw, 135px); opacity: .82; filter: drop-shadow(0 6px 7px rgba(90,77,59,.09)); }
+.cake-flower--left { left: 1%; bottom: 12%; transform: rotate(-8deg); }
+.cake-flower--right { right: 0; bottom: 11%; transform: scaleX(-1) rotate(-6deg); }
+.wish-panel, .blow-panel {
+  padding: 18px 24px; gap: 11px; border-radius: 4px 15px 4px 15px;
+  border-color: rgba(167,125,119,.34);
+  background:
+    radial-gradient(ellipse at 0 0, rgba(237,197,194,.18), transparent 55%),
+    radial-gradient(rgba(105,76,52,.055) .6px, transparent .9px),
+    linear-gradient(135deg, #fff8ed, #f1e6d7);
+  background-size: auto, 7px 7px, auto;
+  box-shadow: 3px 5px 0 rgba(49,92,89,.09), 0 10px 22px rgba(109,76,75,.09);
+}
+.wish-panel textarea {
+  font: 500 15px/1.65 var(--serif);
+  border-radius: 3px 10px 3px 10px;
+  background-color: #fffaf2;
+  box-shadow: inset 0 2px 7px rgba(130,87,83,.06);
+}
+.privacy-note { font: 500 11px/1.6 var(--sans); letter-spacing: .015em; }
+.mic-note { font: 500 12px/1.5 var(--sans); }
+
+.photo-lightbox {
+  background: rgba(39,55,48,.88);
+  backdrop-filter: blur(7px);
+}
+.lightbox-frame {
+  padding: 17px 17px 34px;
+  border: 1px solid rgba(135,103,81,.32);
+  background:
+    radial-gradient(ellipse at 0 0, rgba(236,197,195,.17), transparent 50%),
+    linear-gradient(145deg, #fffaf1, #f0e4d3);
+  box-shadow: 8px 10px 0 rgba(20,45,50,.2), 0 24px 58px rgba(0,0,0,.28);
+}
+.treasure-object svg { width: 46px; }
+.treasure-object:focus-visible { outline: 2px solid #9f6770; outline-offset: 5px; }
+
+@media (max-width: 700px) {
+  .topbar { height: 63px; padding-inline: 18px; }
+  .wordmark { font-size: 20px; }
+  .scene { min-height: 100svh; padding: 82px 14px 32px; }
+  .scene--envelope { padding-top: 68px; gap: 25px; }
+  .envelope-stage { width: min(88vw, 470px); }
+  .side-nav {
+    top: 72px; right: 12px; width: 144px; padding: 10px;
+    grid-template-columns: repeat(2, 1fr); gap: 7px;
+  }
+  .nav-link { width: 53px; height: 50px; font-size: 22px; }
+  .floral-wash--top { width: 78vw; top: -52px; right: -34vw; opacity: .34; }
+  body::before { width: 82vw; height: 90vw; left: -32vw; bottom: -12vh; opacity: .2; }
+  .scene::before { background-size: min(64vw, 390px) auto; opacity: .15; }
+  .home-layout { min-height: min(620px, calc(100svh - 105px)); }
+  .polaroid-collage { width: 96vw; height: min(530px, calc(100svh - 160px)); min-height: 390px; }
+  .polaroid { padding: 8px 8px 31px; }
+  .polaroid--main { width: 54%; height: 74%; left: 23%; top: 13%; padding: 10px 10px 37px; }
+  .polaroid--one { left: 0; top: 8%; width: 30%; height: 36%; }
+  .polaroid--two { right: 0; top: 4%; width: 28%; height: 34%; }
+  .polaroid--three { left: 0; bottom: 3%; width: 29%; height: 34%; }
+  .polaroid--four { right: 0; bottom: 1%; width: 29%; height: 36%; }
+  .polaroid::before { top: -7px; width: 44px; height: 15px; }
+  .polaroid::after { bottom: 12px; }
+  .home-flower { width: 118px; opacity: .67; }
+  .home-flower--left { left: -3%; bottom: 0; }
+  .home-flower--right { right: -3%; top: 0; }
+  .section-paper { min-height: 490px; padding: 21px; }
+  .archive-grid { min-height: 440px; gap: 13px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .archive-placeholder { min-height: 148px; padding: 7px 7px 22px; }
+  .archive-placeholder::after { width: 38px; height: 12px; top: -6px; }
+  .album-book {
+    width: min(95vw, 560px); min-height: 610px;
+    padding: 19px 16px 67px 31px;
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: minmax(300px,auto) minmax(145px,auto);
+    gap: 9px;
+  }
+  .album-spine { left: 18px; }
+  .album-page { min-height: 0; padding: 14px; }
+  .album-page--photos { min-height: 300px; }
+  .album-page--letter { min-height: 145px; }
+  .album-controls { bottom: 13px; gap: 14px; }
+  .round-control { width: 39px; height: 39px; }
+  .cd-wallet { width: min(94vw, 560px); min-height: 450px; padding: 22px; }
+  .cd-pages { min-height: 365px; padding: 12px; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+  .cd-player { width: min(88vw, 430px); min-height: 410px; }
+  .cake-area { width: 100%; height: 310px; }
+  .cake { width: min(82vw, 390px); height: 275px; }
+  .cake-tier--bottom { bottom: 20px; height: 122px; }
+  .cake-tier--top { bottom: 136px; height: 91px; }
+  .candles { top: 11px; left: 24%; width: 52%; height: 34px; grid-template-rows: 9px 11px 14px; }
+  .candle { width: 6px; height: 22px; }
+  .candle .flame { top: -15px; width: 9px; height: 14px; }
+  .cake-flower { width: 90px; }
+  .cake-flower--left { left: -1%; bottom: 8%; }
+  .cake-flower--right { right: -1%; bottom: 8%; }
+  .cake-flower-detail { left: 11%; bottom: 39px; width: 78%; height: 88px; }
+  .scene--candles { min-height: 100svh; justify-content: flex-start; gap: 8px; padding-top: 70px; padding-bottom: 24px; }
+  .scene--candles .cake-area { height: 310px; }
+  .scene--candles .cake { width: min(82vw, 390px); height: 275px; }
+  .scene--candles .cake-tier--bottom { bottom: 20px; height: 122px; }
+  .scene--candles .cake-tier--top { bottom: 136px; height: 91px; }
+  .scene--candles .candles { top: 11px; left: 24%; width: 52%; height: 34px; grid-template-rows: 9px 11px 14px; }
+  .scene--candles .candle { width: 6px; height: 22px; }
+  .scene--candles .cake-flower-detail { left: 11%; bottom: 39px; width: 78%; height: 88px; }
+  .scene--candles .wish-panel textarea { width: min(88vw, 420px); }
+  .scene--candles .cake-area { flex: 0 0 auto; }
+}
+@media (max-width: 380px) {
+  .polaroid-collage { min-height: 365px; height: calc(100svh - 170px); }
+  .polaroid--main { width: 56%; height: 70%; left: 22%; top: 15%; }
+  .home-flower { width: 98px; opacity: .57; }
+  .album-book { min-height: 570px; padding-inline: 29px 12px; }
+  .album-page--photos { min-height: 270px; }
+  .album-page--letter { min-height: 130px; }
+  .cd-wallet { padding: 18px; min-height: 425px; }
+  .cd-pages { min-height: 345px; gap: 11px; }
+  .cake-area { height: 285px; }
+  .cake { width: 84vw; height: 255px; }
+  .cake-tier--bottom { height: 112px; }
+  .cake-tier--top { bottom: 126px; height: 84px; }
+  .candles { top: 9px; height: 31px; grid-template-rows: 8px 10px 13px; }
+  .candle { height: 20px; width: 5px; }
+  .cake-flower-detail { bottom: 35px; height: 78px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .petal { animation: none; }
+}
