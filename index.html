@@ -27,12 +27,12 @@
   </header>
 
   <nav class="side-nav" id="sideNav" aria-label="Sections" aria-hidden="true">
-    <button class="nav-link" type="button" data-target="envelope" aria-label="Sealed envelope" title="Sealed envelope">👩‍❤️‍👩</button>
-    <button class="nav-link" type="button" data-target="home" aria-label="Homepage" title="Homepage">👩‍❤️‍💋‍👩</button>
-    <button class="nav-link" type="button" data-target="archive" aria-label="Photo archive" title="Photo archive">💏</button>
-    <button class="nav-link" type="button" data-target="friends" aria-label="Friends and family" title="Friends and family">🕺</button>
-    <button class="nav-link" type="button" data-target="mixtape" aria-label="CD collection" title="CD collection">💃</button>
-    <button class="nav-link" type="button" data-target="candles" aria-label="Birthday candles" title="Birthday candles">🧑‍🩰</button>
+    <button class="nav-link" type="button" data-target="envelope" aria-label="Sealed envelope" title="Sealed envelope"><span class="nav-index">01</span><span class="nav-name">Sealed envelope</span></button>
+    <button class="nav-link" type="button" data-target="home" aria-label="Homepage" title="Homepage"><span class="nav-index">02</span><span class="nav-name">Homepage</span></button>
+    <button class="nav-link" type="button" data-target="mixtape" aria-label="Mixtape" title="Mixtape"><span class="nav-index">03</span><span class="nav-name">Mixtape</span></button>
+    <button class="nav-link" type="button" data-target="archive" aria-label="Photo archive" title="Photo archive"><span class="nav-index">04</span><span class="nav-name">Photo archive</span></button>
+    <button class="nav-link" type="button" data-target="friends" aria-label="Friends and family" title="Friends and family"><span class="nav-index">05</span><span class="nav-name">Friends &amp; family</span></button>
+    <button class="nav-link" type="button" data-target="candles" aria-label="Cake" title="Cake"><span class="nav-index">06</span><span class="nav-name">Cake</span></button>
   </nav>
   <button class="nav-scrim" id="navScrim" type="button" aria-label="Close sections menu" tabindex="-1"></button>
 
@@ -54,7 +54,7 @@
       <button class="audio-retry" id="audioRetry" type="button" aria-label="Play background music" hidden>♪</button>
     </section>
 
-    <section class="scene scene--home" id="home" aria-label="Homepage" hidden>
+  <section class="scene scene--home" id="home" aria-label="Homepage" hidden>
       <div class="home-layout">
         <div class="home-flower home-flower--left" aria-hidden="true">
           <svg viewBox="0 0 220 330"><path class="stem" d="M105 335 C98 250 130 165 104 70"/><path class="leaf" d="M102 240 C35 198 16 225 20 270 C55 280 82 264 102 240Z"/><g class="lily" transform="translate(104 72)"><path d="M0 0 C-52 -70 -78 -23 -38 10 C-78 32 -48 81 0 22 C48 81 78 32 38 10 C78 -23 52 -70 0 0Z"/><path class="vein" d="M0 5 L-38 -28 M0 5 L38 -28 M0 5 L-32 42 M0 5 L32 42"/></g></svg>
@@ -72,26 +72,7 @@
       </div>
     </section>
 
-    <section class="scene scene--archive" id="archive" aria-label="Photo archive" hidden>
-      <div class="section-paper archive-paper">
-        <div class="archive-grid" id="archiveGrid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section class="scene scene--friends" id="friends" aria-label="Friends and family" hidden>
-      <div class="album-book">
-        <div class="album-spine"></div>
-        <div class="album-page album-page--photos" id="friendPhotos"></div>
-        <div class="album-page album-page--letter" id="friendLetter"></div>
-        <div class="album-controls">
-          <button class="round-control" id="friendPrev" type="button" aria-label="Previous person" disabled>‹</button>
-          <span class="page-dots" id="friendPageDots" aria-hidden="true"></span>
-          <button class="round-control" id="friendNext" type="button" aria-label="Next person" disabled>›</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="scene scene--mixtape" id="mixtape" aria-label="CD collection" hidden>
+  <section class="scene scene--mixtape" id="mixtape" aria-label="CD collection" hidden>
       <div class="cd-wallet">
         <div class="wallet-cover"></div>
         <div class="cd-pages" id="cdPages"></div>
@@ -109,7 +90,26 @@
       </div>
     </section>
 
-    <section class="scene scene--candles" id="candles" aria-label="Birthday candles" hidden>
+  <section class="scene scene--archive" id="archive" aria-label="Photo archive" hidden>
+      <div class="section-paper archive-paper">
+        <div class="archive-grid" id="archiveGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+  <section class="scene scene--friends" id="friends" aria-label="Friends and family" hidden>
+      <div class="album-book">
+        <div class="album-spine"></div>
+        <div class="album-page album-page--photos" id="friendPhotos"></div>
+        <div class="album-page album-page--letter" id="friendLetter"></div>
+        <div class="album-controls">
+          <button class="round-control" id="friendPrev" type="button" aria-label="Previous person" disabled>‹</button>
+          <span class="page-dots" id="friendPageDots" aria-hidden="true"></span>
+          <button class="round-control" id="friendNext" type="button" aria-label="Next person" disabled>›</button>
+        </div>
+      </div>
+    </section>
+
+  <section class="scene scene--candles" id="candles" aria-label="Birthday candles" hidden>
       <div class="cake-area">
         <div class="cake-flower cake-flower--left" aria-hidden="true">
           <svg viewBox="0 0 130 180" role="presentation">
