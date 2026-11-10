@@ -80,7 +80,12 @@ function showSection(id) {
     section.hidden = !active;
     section.classList.toggle('is-active', active);
   });
-  $$('.nav-link').forEach(link => link.classList.toggle('is-current', link.dataset.target === id));
+  $('.nav-link').forEach(link => {
+    const active = link.dataset.target === id;
+    link.classList.toggle('is-current', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
   setMenu(false);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (id === 'friends') renderFriend();
@@ -487,7 +492,8 @@ async function beginMicBlow() {
 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     $('#blowCandles').disabled = false;
-    note.textContent = 'Microphone access is unavailable here. Use the tap option instead.';
+    $('#tapBlowFallback').hidden = false;
+    note.textContent = 'Microphone access is unavailable here. Tap the candles instead.';
     return;
   }
 
@@ -508,7 +514,8 @@ async function beginMicBlow() {
     source.connect(analyser);
 
     const samples = new Uint8Array(analyser.fftSize);
-    let loudFrames = 0;
+    let blowFrames = 0;
+    let noiseFloor = 0.008;
     note.textContent = 'Listening for a gentle blow…';
 
     micTimeout = window.setTimeout(() => {
@@ -516,7 +523,7 @@ async function beginMicBlow() {
       if (!candleSequenceComplete) {
         $('#blowCandles').disabled = false;
         $('#tapBlowFallback').hidden = false;
-        note.textContent = 'No blow was detected. Try again or use the tap option.';
+        note.textContent = 'No blow was detected. Try again or tap the candles.';
       }
     }, 15000);
 
@@ -529,8 +536,16 @@ async function beginMicBlow() {
         sum += value * value;
       }
       const rms = Math.sqrt(sum / samples.length);
-      loudFrames = rms > 0.075 ? loudFrames + 1 : Math.max(0, loudFrames - 2);
-      if (loudFrames >= 10) {
+      const blowThreshold = Math.max(0.032, noiseFloor * 2.25);
+
+      if (rms > blowThreshold) {
+        blowFrames += 1;
+      } else {
+        noiseFloor = (noiseFloor * 0.92) + (rms * 0.08);
+        blowFrames = Math.max(0, blowFrames - 1);
+      }
+
+      if (blowFrames >= 6) {
         note.textContent = '';
         extinguishCandles();
         return;
