@@ -722,3 +722,24 @@ main { min-height: 100svh; }
     opacity: .12;
   }
 }
+
+
+/* Final envelope-state correction: the letter is completely concealed before opening. */
+.letter-sheet {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(112%);
+  transition:
+    transform .82s .16s cubic-bezier(.16,.74,.2,1),
+    opacity .32s .16s ease,
+    visibility 0s .16s;
+}
+.envelope.is-open .letter-sheet {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(27%);
+  transition:
+    transform .82s .16s cubic-bezier(.16,.74,.2,1),
+    opacity .32s .16s ease,
+    visibility 0s;
+}
