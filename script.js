@@ -31,7 +31,7 @@ const CONTENT = {
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-const sections = ['envelope', 'home', 'archive', 'friends', 'mixtape', 'candles'];
+const sections = ['envelope', 'home', 'mixtape', 'archive', 'friends', 'candles'];
 let currentSection = 'envelope';
 let currentFriend = 0;
 let currentCDPage = 0;
@@ -40,6 +40,7 @@ let wishConfirmed = false;
 let audioContext = null;
 let micStream = null;
 let micFrame = null;
+let micTimeout = null;
 let envelopeTimer = null;
 let backgroundPausedForCD = false;
 let tapToExtinguish = false;
@@ -423,10 +424,12 @@ function createCandles() {
 
 function enableTapToExtinguish() {
   if (candleSequenceComplete || candleExtinguishing) return;
+  stopMic();
   tapToExtinguish = true;
   const set = $('#candleSet');
   set.classList.add('is-tap-mode');
   $('#candleSet .candle:not(.is-out)').forEach(candle => { candle.disabled = false; });
+  $('#blowCandles').disabled = true;
   $('#tapBlowFallback').hidden = true;
   $('#micNote').textContent = 'Tap each candle to put it out.';
 }
@@ -476,46 +479,84 @@ $('#tapBlowFallback').addEventListener('click', enableTapToExtinguish);
 
 async function beginMicBlow() {
   const note = $('#micNote');
-  if (!wishConfirmed) return;
+  if (!wishConfirmed || candleSequenceComplete || candleExtinguishing) return;
+
+  $('#blowCandles').disabled = true;
+  $('#tapBlowFallback').hidden = false;
+  note.textContent = 'Allow microphone access, then blow gently toward your microphone.';
+
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    $('#tapBlowFallback').hidden = false;
-    note.textContent = 'Microphone unavailable on this browser.';
+    $('#blowCandles').disabled = false;
+    note.textContent = 'Microphone access is unavailable here. Use the tap option instead.';
     return;
   }
+
   try {
-    micStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!AudioCtx) throw new Error('Audio analysis is unavailable.');
+
+    micStream = await navigator.mediaDevices.getUserMedia({
+      audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
+    });
     audioContext = new AudioCtx();
+    if (audioContext.state === 'suspended') await audioContext.resume();
+
     const source = audioContext.createMediaStreamSource(micStream);
     const analyser = audioContext.createAnalyser();
-    analyser.fftSize = 512;
+    analyser.fftSize = 1024;
+    analyser.smoothingTimeConstant = 0.15;
     source.connect(analyser);
+
     const samples = new Uint8Array(analyser.fftSize);
     let loudFrames = 0;
-    note.textContent = 'Listening';
+    note.textContent = 'Listening for a gentle blow…';
+
+    micTimeout = window.setTimeout(() => {
+      stopMic();
+      if (!candleSequenceComplete) {
+        $('#blowCandles').disabled = false;
+        $('#tapBlowFallback').hidden = false;
+        note.textContent = 'No blow was detected. Try again or use the tap option.';
+      }
+    }, 15000);
+
     const listen = () => {
+      if (!audioContext || candleSequenceComplete || candleExtinguishing) return;
       analyser.getByteTimeDomainData(samples);
       let sum = 0;
-      for (const sample of samples) { const value = (sample - 128) / 128; sum += value * value; }
+      for (const sample of samples) {
+        const value = (sample - 128) / 128;
+        sum += value * value;
+      }
       const rms = Math.sqrt(sum / samples.length);
-      loudFrames = rms > 0.13 ? loudFrames + 1 : Math.max(0, loudFrames - 1);
-      if (loudFrames >= 8) { note.textContent = ''; extinguishCandles(); return; }
+      loudFrames = rms > 0.075 ? loudFrames + 1 : Math.max(0, loudFrames - 2);
+      if (loudFrames >= 10) {
+        note.textContent = '';
+        extinguishCandles();
+        return;
+      }
       micFrame = requestAnimationFrame(listen);
     };
     listen();
   } catch (error) {
     stopMic();
+    $('#blowCandles').disabled = false;
     $('#tapBlowFallback').hidden = false;
-    note.textContent = 'Microphone permission is unavailable.';
+    note.textContent = 'Microphone permission was not available. You can still use the tap option.';
   }
 }
 function stopMic() {
   if (micFrame) cancelAnimationFrame(micFrame);
   micFrame = null;
+  if (micTimeout) window.clearTimeout(micTimeout);
+  micTimeout = null;
   if (micStream) micStream.getTracks().forEach(track => track.stop());
   micStream = null;
-  if (audioContext) { audioContext.close().catch(() => {}); audioContext = null; }
+  if (audioContext) {
+    const context = audioContext;
+    audioContext = null;
+    context.close().catch(() => {});
+  }
 }
 function startPetalFinale() {
   const finale = $('#petalFinale');
