@@ -96,7 +96,7 @@ function showSection(id) {
 menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
 navScrim.addEventListener('click', () => setMenu(false));
 Array.from(document.querySelectorAll('.nav-link')).forEach(link => link.addEventListener('click', () => showSection(link.dataset.target)));
-$('.wordmark').addEventListener('click', event => { event.preventDefault(); showSection('envelope'); });
+// The wordmark was intentionally removed; no click binding is needed here.
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     setMenu(false);
