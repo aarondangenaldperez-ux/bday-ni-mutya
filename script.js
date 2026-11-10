@@ -80,7 +80,7 @@ function showSection(id) {
     section.hidden = !active;
     section.classList.toggle('is-active', active);
   });
-  $('.nav-link').forEach(link => {
+  $$('.nav-link').forEach(link => {
     const active = link.dataset.target === id;
     link.classList.toggle('is-current', active);
     if (active) link.setAttribute('aria-current', 'page');
