@@ -810,3 +810,10 @@ main { min-height: 100svh; }
     opacity: .17;
   }
 }
+
+
+/* Keep the added botanical and Peanuts background art on the envelope page only. */
+body::before,
+.scene::before {
+  display: none !important;
+}
