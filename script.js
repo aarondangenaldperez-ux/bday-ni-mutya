@@ -414,7 +414,7 @@ function createCandles() {
       candle.classList.add('is-out');
       candle.disabled = true;
       candle.setAttribute('aria-label', `Birthday candle ${index + 1}, extinguished`);
-      const candlesLeft = $('#candleSet .candle:not(.is-out)').length;
+      const candlesLeft = $$('#candleSet .candle:not(.is-out)').length;
       if (candlesLeft === 0) finishCandles();
     });
 
@@ -428,7 +428,7 @@ function enableTapToExtinguish() {
   tapToExtinguish = true;
   const set = $('#candleSet');
   set.classList.add('is-tap-mode');
-  $('#candleSet .candle:not(.is-out)').forEach(candle => { candle.disabled = false; });
+  $$('#candleSet .candle:not(.is-out)').forEach(candle => { candle.disabled = false; });
   $('#blowCandles').disabled = true;
   $('#tapBlowFallback').hidden = true;
   $('#micNote').textContent = 'Tap each candle to put it out.';
@@ -441,7 +441,7 @@ function finishCandles() {
   candleExtinguishing = false;
   $('#candleSet').classList.remove('is-tap-mode');
   stopMic();
-  $('#candleSet .candle').forEach(candle => { candle.disabled = true; });
+  $$('#candleSet .candle').forEach(candle => { candle.disabled = true; });
   $('#blowCandles').disabled = true;
   $('#tapBlowFallback').hidden = true;
   $('#micNote').textContent = '';
@@ -453,7 +453,7 @@ function extinguishCandles() {
   candleExtinguishing = true;
   tapToExtinguish = false;
   $('#candleSet').classList.remove('is-tap-mode');
-  const candles = $('#candleSet .candle');
+  const candles = $$('#candleSet .candle');
   candles.forEach((candle, index) => {
     window.setTimeout(() => {
       candle.classList.add('is-out');
